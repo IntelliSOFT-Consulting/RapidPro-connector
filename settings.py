@@ -4,7 +4,7 @@
 # TODO: Put token in environment
 API_TOKEN = '952c3dbad9bbef5f75aa5d137bf0ba291ace5f4c'
 
-RAPIDPRO_HOST = 'http://127.0.0.1:8000'
+RAPIDPRO_HOST = 'http://45.79.138.76'
 OPENMRS_DB_SETTINGS = {
     'DB_NAME':'openmrs',
     'HOSTNAME':'localhost',
@@ -20,7 +20,7 @@ CONNECTOR_DB_SETTINGS = {
 }
 
 CONNECTOR_DB_TABLES = {
-    "LAST_CHECKED":'Last_Checked',
+    "LAST_CHECKED":"Last_Checked",
     "USERS":'Users',
 }
 
