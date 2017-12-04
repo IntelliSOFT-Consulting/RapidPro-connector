@@ -45,10 +45,26 @@ class ContactNumber:
         return repr_name.strip()
 class OpenMRSContact:
     """ Model that holds contact from openmrs """
-    def __init__(self, name, number, date_created, program_name=None):
+    def __init__(self, name, number, date_created=None, program_name=None):
         """ Constructor """
         self.name = name
         self.number = number
+        self.date_created = date_created
+        self.program_name = program_name
+
+    def __repr__(self):
+        """ readable model representation """
+        repr_name = '{} {}'.format(self.name, self.number)
+        return repr_name.strip()
+
+class AppointmentContact:
+    """ Model that holds contacts for appointment scheduling """
+    def __init__(self, name, number,start_date, provider_name, date_created=None, program_name=None):
+        """ Constructor """
+        self.name = name
+        self.number = number
+        self.start_date = start_date
+        self.provider_name = provider_name
         self.date_created = date_created
         self.program_name = program_name
 
