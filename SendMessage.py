@@ -1,4 +1,5 @@
 #Class to handle getting contacts from OpenMRS and send messages to RapidPro
+from datetime import datetime
 from models import Database
 import view_model as vm
 from settings import RAPIDPRO_HOST, API_TOKEN
@@ -91,13 +92,13 @@ class SendMessage:
         ConnectorUtils().update_last_checked(last_checked, self.type_id)
         return contact_list
 
-    def get_message(self, name, provider=None, start_date=None):
+    def get_message(self, name, provider=None, start_date=None, time=None):
         """ Get message to be sent from message utils """
         return {
             1: messageutils.enrollment_message(name),
             2: messageutils.program_kick_off_message(name),
             3: messageutils.birthday_message(name),
-            4: messageutils.appointment_booking_message(name, provider, start_date, start_date, VENUE)
+            4: messageutils.appointment_booking_message(name, provider, start_date, time, VENUE)
         }.get(self.type_id, messageutils.enrollment_message(name))
 
     def broadcast_message(self):
@@ -111,7 +112,8 @@ class SendMessage:
                     
                     if openmrs_contacts[index]:
                         contact_obj = openmrs_contacts[index]
-                        text = self.get_message(contact_obj.name, contact_obj.provider_name, contact_obj.start_date, contact_obj.start_date)
+                        date_time_obj =  datetime.strptime(contact_obj.start_date, '%Y-%m-%d %H:%M:%S')
+                        text = self.get_message(contact_obj.name, contact_obj.provider_name, date_time_obj.date(), date_time_obj.time())
                         contacts = [contact]
                         try:
                             broadcast = self.client.create_broadcast(text, contacts=contacts)
