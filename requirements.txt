@@ -17,5 +17,5 @@ rapidpro-python==2.1.8
 requests==2.18.4
 singledispatch==3.4.0.3
 six==1.11.0
-urllib3==1.22
+urllib3==1.26.5
 wrapt==1.10.11
